@@ -97,4 +97,16 @@ public class IntArrayWorker {
 		return count;
 	}
 
+	public int getLargest(){
+		int large = 0;
+		for (int row = 0; row < matrix.length; row++){
+			for (int col = 0; col < matrix[0].length; col++){
+				if (matrix[row][col] > large){
+					large = matrix[row][col];
+				}
+			}
+		}
+		return large;
+	}
+
 }
