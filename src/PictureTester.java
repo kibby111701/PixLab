@@ -62,6 +62,12 @@ public class PictureTester
     barbara.negate();
     barbara.explore();
   }
+
+  public static void testGrayscale(){
+    Picture swan = new Picture("swan.jpg");
+    swan.grayscale();
+    swan.explore();
+  }
   
   /** Main method for testing.  Every class can have a main
     * method in Java */
@@ -74,8 +80,8 @@ public class PictureTester
     // testKeepOnlyBlue();
     //testKeepOnlyRed();
     //testKeepOnlyGreen();
-    testNegate();
-    //testGrayscale();
+    // testNegate();
+    testGrayscale();
     // testFixUnderwater();
     //testMirrorVertical();
     // testMirrorTemple();
