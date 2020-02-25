@@ -114,13 +114,13 @@ public class PictureTester
     // testGrayscale();
     // testFixUnderwater();
     //testMirrorVertical();
-    // testMirrorTemple();
+    testMirrorTemple();
     // testMirrorVerticalRightToLeft();
     // testMirrorHorizontal();
     // testMirrorHorizontalBotToTop();
     //testMirrorArms();
     //testMirrorGull();
-    testMirrorDiagonal();
+    // testMirrorDiagonal();
     //testCollage();
     //testCopy();
     //testEdgeDetection();
