@@ -37,6 +37,12 @@ public class PictureTester
     mark.mirrorHorizontalBotToTop();
     mark.explore();
   }
+
+  public static void testMirrorDiagonal(){
+    Picture beach = new Picture("beach.jpg");
+    beach.mirrorDiagonal();
+    beach.explore();
+  }
   
   /** Method to test mirrorTemple */
   public static void testMirrorTemple()
@@ -111,10 +117,10 @@ public class PictureTester
     // testMirrorTemple();
     // testMirrorVerticalRightToLeft();
     // testMirrorHorizontal();
-    testMirrorHorizontalBotToTop();
+    // testMirrorHorizontalBotToTop();
     //testMirrorArms();
     //testMirrorGull();
-    //testMirrorDiagonal();
+    testMirrorDiagonal();
     //testCollage();
     //testCopy();
     //testEdgeDetection();
