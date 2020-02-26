@@ -361,17 +361,53 @@ public class Picture extends SimplePicture {
 	public void edgeDetection(int edgeDist) {
 		Pixel leftPixel = null;
 		Pixel rightPixel = null;
+		Pixel bottomPixel = null;
 		Pixel[][] pixels = this.getPixels2D();
 		Color rightColor = null;
-		for (int row = 0; row < pixels.length; row++) {
+		Color bottomColor = null;
+		for (int row = 0; row < pixels.length-1; row++) {
 			for (int col = 0; col < pixels[0].length - 1; col++) {
 				leftPixel = pixels[row][col];
 				rightPixel = pixels[row][col + 1];
+				bottomPixel = pixels[row+1][col];
+				bottomColor = bottomPixel.getColor();
 				rightColor = rightPixel.getColor();
-				if (leftPixel.colorDistance(rightColor) > edgeDist)
+				if (leftPixel.colorDistance(rightColor) > edgeDist || leftPixel.colorDistance(bottomColor) > edgeDist){
 					leftPixel.setColor(Color.BLACK);
-				else
+				}else{
 					leftPixel.setColor(Color.WHITE);
+				}
+			}
+		}
+	}
+
+	public void edgeDetection2(int edgeDist){
+		Pixel[][] pixels = this.getPixels2D();
+		Pixel currentPixel = null;
+		Pixel vertPixel = null;
+		Pixel horiPixel = null;
+		Color vertColor = null;
+		Color horiColor = null;
+		Color currentColor = null;
+		for (int row = 1; row < pixels.length - 1; row ++){
+			for (int col = 1; col < pixels[0].length - 1; col++){
+				currentPixel = pixels[row][col];
+				currentColor = currentPixel.getColor();
+				for (int i = -1; i <= -1; i += 2){
+					vertPixel = pixels[row + i][col];
+					vertColor = vertPixel.getColor();
+					int vRGBTotal = vertPixel.getRed() + vertPixel.getBlue() + vertPixel.getGreen();
+					horiPixel = pixels[row][col + i];
+					horiColor = horiPixel.getColor();
+					int hRGBTotal = horiPixel.getRed() + horiPixel.getBlue() + horiPixel.getGreen();
+					
+					if (vRGBTotal < 765 && vRGBTotal > 0 && hRGBTotal < 765 && hRGBTotal > 0
+						&& (vertPixel.colorDistance(currentColor) > edgeDist || horiPixel.colorDistance(currentColor) > edgeDist)) {
+						vertPixel.setColor(Color.BLACK);
+					}else{
+						vertPixel.setColor(Color.WHITE);
+					}
+				}
 			}
 		}
 	}
