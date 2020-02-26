@@ -307,6 +307,21 @@ public class Picture extends SimplePicture {
 		}
 	}
 
+	public void croppedCopy (Picture fromPic, int startFromRow, int endFromRow, int startFromCol, int endFromCol, int startToRow, int startToCol){
+		Pixel fromPixel = null;
+		Pixel toPixel = null;
+		Pixel[][] toPixels = this.getPixels2D();
+		Pixel[][] fromPixels = fromPic.getPixels2D();
+
+		for (int fromRow = startFromRow, toRow = startToRow; fromRow < endFromRow && toRow < toPixels.length; fromRow++, toRow++){
+			for (int fromCol = startFromCol, toCol = startToCol; fromCol < endFromCol && toCol < toPixels.length; fromCol++, toCol++){
+				fromPixel = fromPixels[fromRow][fromCol];
+				toPixel = toPixels[toRow][toCol];
+				toPixel.setColor(fromPixel.getColor());
+			}
+		}
+	} //This is a really ugly way to do it but I mean it works
+
 	/** Method to create a collage of several pictures */
 	public void createCollage() {
 		Picture flower1 = new Picture("flower1.jpg");
@@ -321,6 +336,20 @@ public class Picture extends SimplePicture {
 		this.copy(flower2, 500, 0);
 		this.mirrorVertical();
 		this.write("collage.jpg");
+	}
+
+	public void myCollage(){
+		Picture mark = new Picture("blue-mark.jpg");
+		Picture swan = new Picture("swan.jpg");
+		Picture notBlueMark = new Picture("blue-mark.jpg");
+		notBlueMark.zeroBlue();
+		this.croppedCopy(mark, 169, 300, 280, 390, 100, 100);
+		swan.grayscale();
+		this.croppedCopy(notBlueMark, 110, 390, 180, 460, 400, 200);
+		this.croppedCopy(swan, 200, 320, 200, 320, 200, 320);
+		this.mirrorDiagonal();
+		this.write("myCollage.jpg");
+
 	}
 
 	/**
